@@ -2,7 +2,7 @@
 
 ---
 
-<header class="bg-black">
+<header class="bg-black" transition:animate="none">
   <nav
     class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
     aria-label="Global"
@@ -132,3 +132,23 @@
     </div>
   </div>
 </header>
+
+<script type="module">
+  document.addEventListener("DOMContentLoaded", () => {
+    const openMenuBtn = document.getElementById("openMenuBtn");
+    const closeMenuBtn = document.getElementById("closeMenuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    if (openMenuBtn && closeMenuBtn && mobileMenu) {
+      // Abrir menú móvil
+      openMenuBtn.addEventListener("click", () => {
+        mobileMenu.classList.remove("hidden");
+      });
+
+      // Cerrar menú móvil
+      closeMenuBtn.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+      });
+    }
+  });
+</script>
