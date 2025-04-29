@@ -1,0 +1,99 @@
+---
+// filepath: e:\Proyecto_Herramientas de desarrollo\hd-22016-grupo7-apf1\src\components\XboxGameCard.astro
+const { title, type, region, price, originalPrice, discount, image } =
+  Astro.props;
+const id = title
+  .toLowerCase()
+  .replace(/\s+/g, "-")
+  .replace(/[^a-z0-9-]/g, ""); // id único y seguro
+---
+
+<div
+  class="bg-white rounded-xl overflow-hidden shadow hover:shadow-lg transition group w-48 mx-auto"
+  id={`card-${id}`}
+>
+  <div class="relative">
+    <img
+      src={image}
+      alt={title}
+      loading="lazy"
+      class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-300"
+    />
+
+    <!-- Botón corazón -->
+    <button
+      type="button"
+      class="favorite-btn absolute top-2 right-2 bg-white rounded-full p-1 shadow hover:scale-110 transition"
+      data-id={id}
+    >
+      <svg
+        id={`icon-${id}`}
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5 text-gray-400 transition-colors duration-300"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
+        2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 
+        4.5 2.09C13.09 3.81 14.76 3 16.5 
+        3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 
+        6.86-8.55 11.54L12 21.35z"
+        ></path>
+      </svg>
+    </button>
+  </div>
+
+  <div class="p-3">
+    <h2 class="text-sm font-semibold text-gray-800 mb-1 truncate">{title}</h2>
+    <div class="text-xs text-gray-500">{type} • {region}</div>
+
+    <div class="flex items-center justify-between mt-2">
+      <span class="text-green-600 font-bold">{price.toFixed(2)}€</span>
+      <span class="text-gray-400 line-through text-xs"
+        >{originalPrice.toFixed(2)}€</span
+      >
+    </div>
+
+    <div class="text-xs mt-1 text-gray-700">
+      Puede activarse en: <span class="font-bold">Perú</span>
+    </div>
+
+    <div
+      class="mt-2 text-xs inline-block bg-red-500 text-white px-2 py-0.5 rounded"
+    >
+      -{discount}%
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  // Verifica si el evento ya está registrado
+  if (!window.__xboxGameCardClickListenerRegistered) {
+    window.__xboxGameCardClickListenerRegistered = true;
+
+    document.addEventListener("click", function (e) {
+      const button = e.target.closest('button.favorite-btn');
+      if (!button) {
+        console.log("Botón no encontrado");
+        return;
+      }
+
+      const id = button.getAttribute("data-id");
+      const icon = document.getElementById(`icon-${id}`);
+      if (!icon) {
+        console.log(`Ícono con ID icon-${id} no encontrado`);
+        return;
+      }
+
+      console.log(`Cambiando color del ícono con ID icon-${id}`);
+      if (icon.classList.contains("text-gray-400")) {
+        icon.classList.remove("text-gray-400");
+        icon.classList.add("text-green-500");
+      } else {
+        icon.classList.remove("text-green-500");
+        icon.classList.add("text-gray-400");
+      }
+    });
+  }
+</script>

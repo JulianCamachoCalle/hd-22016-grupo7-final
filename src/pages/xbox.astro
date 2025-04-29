@@ -1,5 +1,245 @@
 ---
 import Layout from "../layouts/Layout.astro";
----
+import XboxGameCard from "../components/XboxComponents/XboxGameCard.astro";
+import { getCollection } from "astro:content";
 
-<Layout title="G2A - Xbox" />
+const xbox = await getCollection("xboxContent");
+
+const itemsPerPage = 12;
+const url = new URL(Astro.request.url);
+const page = Number(url.searchParams.get("page")) || 1;
+const totalPages = Math.ceil(xbox.length / itemsPerPage);
+
+// Pagina los juegos de acuerdo al número de página seleccionado
+const paginatedGames = xbox.slice(
+    (page - 1) * itemsPerPage,
+    page * itemsPerPage,
+);
+---
+<Layout title="G2A - Xbox">
+    <section
+        class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-4 gap-6"
+    >
+        <!-- Filtros -->
+        <aside class="hidden md:block col-span-1">
+            <div class="space-y-8">
+                <!-- Filtro de Tipo -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Tipo</h3>
+                    <div class="flex flex-col gap-2">
+                        {
+                            ["Clave", "Regalo", "Cuenta"].map((tipo) => (
+                                <label class="flex items-center gap-2">
+                                    <input
+                                        type="checkbox"
+                                        class="accent-green-500"
+                                    />
+                                    {tipo}
+                                    <span class="text-xs text-gray-500 ml-1">
+                                        ({Math.floor(Math.random() * 15) + 1})
+                                    </span>
+                                </label>
+                            ))
+                        }
+                    </div>
+                </div>
+
+                <!-- Filtro de Categorías -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Categorías</h3>
+                    <div id="category-list" class="flex flex-col gap-2">
+                        {
+                            [
+                                "Acción",
+                                "Aventura",
+                                "Deportes",
+                                "Estrategia",
+                                "Rol",
+                                "Simulación",
+                                "Terror",
+                                "Carreras",
+                                "Puzzle",
+                                "Plataformas",
+                                "Shooter",
+                                "Survival",
+                                "Indie",
+                                "Multijugador",
+                                "Sandbox",
+                            ].map((category, idx) => (
+                                <label
+                                    class={`flex items-center gap-2 ${idx > 9 ? "hidden extra-category" : ""}`}
+                                >
+                                    <input
+                                        type="checkbox"
+                                        class="accent-green-500"
+                                    />
+                                    {category}
+                                    <span class="text-xs text-gray-500 ml-1">
+                                        ({Math.floor(Math.random() * 15) + 1})
+                                    </span>
+                                </label>
+                            ))
+                        }
+                    </div>
+
+                    <!-- Botón mostrar más -->
+                    <button
+                        type="button"
+                        onclick="toggleCategories()"
+                        class="mt-2 text-green-600 text-sm hover:underline"
+                    >
+                        Mostrar más
+                    </button>
+                </div>
+
+                <!-- Filtro de Precio -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Precio</h3>
+
+                    <!-- Rango -->
+                    <div class="flex items-center gap-2 mb-2">
+                        <input
+                            id="min-price"
+                            type="number"
+                            min="0"
+                            value="0"
+                            class="w-20 border rounded p-1 text-sm"
+                        />
+                        <span>-</span>
+                        <input
+                            id="max-price"
+                            type="number"
+                            min="0"
+                            value="100"
+                            class="w-20 border rounded p-1 text-sm"
+                        />
+                    </div>
+
+                    <input
+                        id="price-range"
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="100"
+                        class="w-full accent-green-500"
+                    />
+                </div>
+            </div>
+        </aside>
+
+        <!-- Juegos -->
+        <main class="col-span-3">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                {
+                    xbox.map((game) => (
+                        <div class="game-card">
+                            <a
+                                href={`/xbox/${game.slug}`}
+                                class="block hover:opacity-80 transition"
+                            >
+                                <XboxGameCard {...game.data} />
+                            </a>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <!-- Resultados -->
+            <div class="text-center mt-8 text-sm text-gray-600">
+                {paginatedGames.length} de {xbox.length} artículos
+            </div>
+
+            <!-- Paginación -->
+            <div class="flex justify-center mt-4 space-x-2 pagination">
+                {
+                    Array.from(
+                        { length: Math.ceil(xbox.length / 12) },
+                        (_, i) => {
+                            const p = i + 1;
+                            return (
+                                <a
+                                    href={`?page=${p}`}
+                                    class="px-3 py-1 border rounded text-sm"
+                                >
+                                    {p}
+                                </a>
+                            );
+                        },
+                    )
+                }
+            </div>
+
+            <!-- Script para filtros -->
+            <script is:inline>
+                // Mostrar más categorías
+                function toggleCategories() {
+                    const extras = document.querySelectorAll(".extra-category");
+                    extras.forEach((el) => el.classList.toggle("hidden"));
+                    const btn = event.target;
+                    if (btn.innerText === "Mostrar más") {
+                        btn.innerText = "Mostrar menos";
+                    } else {
+                        btn.innerText = "Mostrar más";
+                    }
+                }
+
+                // Sincronizar precio
+                const minPriceInput = document.getElementById("min-price");
+                const maxPriceInput = document.getElementById("max-price");
+                const priceRange = document.getElementById("price-range");
+
+                minPriceInput.addEventListener("input", updatePriceRange);
+                maxPriceInput.addEventListener("input", updatePriceRange);
+                priceRange.addEventListener("input", updatePriceInputs);
+
+                function updatePriceRange() {
+                    const min = parseInt(minPriceInput.value) || 0;
+                    const max = parseInt(maxPriceInput.value) || 100;
+                    if (min > max) {
+                        minPriceInput.value = max;
+                    }
+                    priceRange.min = min;
+                    priceRange.max = max;
+                    priceRange.value = max;
+                }
+
+                function updatePriceInputs() {
+                    maxPriceInput.value = priceRange.value;
+                }
+            </script>
+            <script is:inline>
+                (() => {
+                    const cards = Array.from(
+                        document.querySelectorAll(".game-card"),
+                    );
+                    const links = Array.from(
+                        document.querySelectorAll(".pagination a"),
+                    );
+                    const params = new URL(location.href).searchParams;
+                    const page = Number(params.get("page")) || 1;
+                    const perPage = 12;
+                    const start = (page - 1) * perPage;
+                    const end = page * perPage;
+
+                    // 1) mostrar/ocultar cards
+                    cards.forEach((card, i) => {
+                        card.style.display =
+                            i >= start && i < end ? "" : "none";
+                    });
+
+                    // 2) resaltar el link activo
+                    links.forEach((a) => {
+                        const p =
+                            Number(new URL(a.href).searchParams.get("page")) ||
+                            1;
+                        if (p === page) {
+                            a.classList.add("bg-green-500", "text-white");
+                        } else {
+                            a.classList.remove("bg-green-500", "text-white");
+                        }
+                    });
+                })();
+            </script>
+        </main>
+    </section>
+</Layout>
