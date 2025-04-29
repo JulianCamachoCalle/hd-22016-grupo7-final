@@ -1,5 +1,260 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const playStation = [
+    {
+        title: "God of War Ragnarök",
+        price: 59.99,
+        originalPrice: 69.99,
+        discount: 15,
+        image: "Gears of War E-Day.webp",
+        description: "Embárcate en un viaje épico y conmovedor mientras Kratos y Atreus luchan por aferrarse el uno al otro.",
+        rating: 5
+    },
+    {
+        title: "Star Citizen",
+        price: 49.99,
+        originalPrice: 59.99,
+        discount: 20,
+        image: "Star Citizen.webp",
+        description: "Explora un universo infinito en esta épica aventura espacial.",
+        rating: 4
+    },
+    {
+        title: "Assassin's Creed Shadows",
+        price: 54.99,
+        originalPrice: 64.99,
+        discount: 10,
+        image: "Assassin's Creed Shadows.webp",
+        description: "Sumérgete en una nueva era de la hermandad de los asesinos.",
+        rating: 4
+    },
+    {
+        title: "Avowed",
+        price: 44.99,
+        originalPrice: 54.99,
+        discount: 25,
+        image: "Avowed.webp",
+        description: "Un RPG de fantasía en primera persona con una historia profunda.",
+        rating: 5
+    },
+    {
+        title: "GTA VI",
+        price: 69.99,
+        originalPrice: 79.99,
+        discount: 12,
+        image: "gtavi.webp",
+        description: "Vive la experiencia definitiva del crimen en Vice City.",
+        rating: 5
+    },
+    {
+        title: "ARK 2",
+        price: 39.99,
+        originalPrice: 49.99,
+        discount: 30,
+        image: "ARK 2.webp",
+        description: "Sobrevive en un mundo prehistórico lleno de dinosaurios.",
+        rating: 4
+    }
+];
+
+const itemsPerPage = 12;
+const url = new URL(Astro.request.url);
+const page = Number(url.searchParams.get("page")) || 1;
+const totalPages = Math.ceil(playStation.length / itemsPerPage);
+
+const paginatedGames = playStation.slice(
+    (page - 1) * itemsPerPage,
+    page * itemsPerPage,
+);
 ---
 
-<Layout title="G2A - Play Station" />
+<Layout title="G2A - Play Station">
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-r from-blue-900 to-indigo-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-6">
+                    <h1 class="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+                        PlayStation Universe
+                    </h1>
+                    <p class="text-lg text-gray-300">
+                        Explora un mundo de entretenimiento sin límites con los mejores títulos de PlayStation.
+                    </p>
+                    <div class="flex gap-4">
+                        <button class="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-full transition-all">
+                            Explorar Juegos
+                        </button>
+                        <button class="border border-white px-6 py-3 rounded-full hover:bg-white hover:text-blue-900 transition-all">
+                            Ver Ofertas
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg filter blur-xl"></div>
+                    <img 
+                        src="/src/assets/images-home/ps5-console.webp"
+                        alt="PlayStation" 
+                        class="relative z-10 w-full h-auto rounded-lg shadow-2xl"
+                    />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="max-w-7xl mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Sidebar con Filtros -->
+            <aside class="md:col-span-1">
+                <div class="bg-white rounded-xl shadow-lg p-6 sticky top-4">
+                    <h2 class="text-2xl font-bold mb-6 text-gray-800">Filtros</h2>
+                    
+                    <!-- Búsqueda -->
+                    <div class="mb-6">
+                        <div class="relative">
+                            <input 
+                                type="text" 
+                                placeholder="Buscar juegos..." 
+                                class="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute left-3 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Géneros -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold mb-3 text-gray-700">Géneros</h3>
+                        <div class="space-y-2">
+                            {
+                                ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"].map((genre) => (
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input
+                                            type="checkbox"
+                                            class="form-checkbox h-4 w-4 text-blue-600"
+                                        />
+                                        <span class="text-gray-700 group-hover:text-blue-600">{genre}</span>
+                                    </label>
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Precio -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold mb-3 text-gray-700">Precio</h3>
+                        <div class="space-y-4">
+                            <input
+                                type="range"
+                                min="0"
+                                max="100"
+                                value="100"
+                                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                            />
+                            <div class="flex justify-between space-x-4">
+                                <input
+                                    type="number"
+                                    min="0"
+                                    value="0"
+                                    class="w-20 px-2 py-1 border rounded-md text-sm"
+                                />
+                                <span class="text-gray-500">-</span>
+                                <input
+                                    type="number"
+                                    min="0"
+                                    value="100"
+                                    class="w-20 px-2 py-1 border rounded-md text-sm"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Game Cards Grid -->
+            <main class="md:col-span-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {
+                        playStation.map((game) => (
+                            <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                                <div class="relative">
+                                    <img
+                                        src={`/src/assets/images-home/${game.image}`}
+                                        alt={game.title}
+                                        class="w-full h-48 object-cover hover:scale-105 transition-transform duration-300"
+                                    />
+                                    {game.discount && (
+                                        <span class="absolute top-2 right-2 bg-blue-600 text-white px-2 py-1 rounded-full text-sm font-semibold">
+                                            -{game.discount}%
+                                        </span>
+                                    )}
+                                </div>
+                                
+                                <div class="p-4">
+                                    <h3 class="font-bold text-lg text-gray-800 mb-2 line-clamp-1">
+                                        {game.title}
+                                    </h3>
+                                    
+                                    <div class="flex items-center gap-1 mb-2">
+                                        {Array(5).fill("").map((_, i) => (
+                                            <span class={i < game.rating ? "text-yellow-400" : "text-gray-300"}>
+                                                ★
+                                            </span>
+                                        ))}
+                                    </div>
+
+                                    <p class="text-sm text-gray-600 mb-3 line-clamp-2">
+                                        {game.description}
+                                    </p>
+
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-baseline gap-2">
+                                            <span class="text-2xl font-bold text-blue-600">
+                                                ${game.price}
+                                            </span>
+                                            {game.originalPrice && (
+                                                <span class="text-sm text-gray-400 line-through">
+                                                    ${game.originalPrice}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+                                            Agregar
+                                        </button>
+                                    </div>
+                                </div>
+                            </article>
+                        ))
+                    }
+                </div>
+
+                <!-- Paginación -->
+                <div class="mt-8 space-y-4">
+                    <div class="text-center text-sm text-gray-600">
+                        Mostrando {paginatedGames.length} de {playStation.length} juegos
+                    </div>
+
+                    <nav class="flex justify-center gap-2">
+                        {
+                            Array.from({ length: totalPages }, (_, i) => (
+                                <a
+                                    href={`?page=${i + 1}`}
+                                    class={`px-4 py-2 rounded-lg ${
+                                        page === i + 1
+                                            ? "bg-blue-600 text-white"
+                                            : "bg-white text-gray-700 hover:bg-gray-50"
+                                    }`}
+                                >
+                                    {i + 1}
+                                </a>
+                            ))
+                        }
+                    </nav>
+                </div>
+            </main>
+        </div>
+    </section>
+</Layout>
