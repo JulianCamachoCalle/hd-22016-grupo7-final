@@ -1,5 +1,315 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const playStation = await getCollection("playStationContent");
+
+const itemsPerPage = 12;
+const url = new URL(Astro.request.url);
+const page = Number(url.searchParams.get("page")) || 1;
+const totalPages = Math.ceil(playStation.length / itemsPerPage);
+
+const paginatedGames = playStation.slice(
+    (page - 1) * itemsPerPage,
+    page * itemsPerPage,
+);
 ---
 
-<Layout title="G2A - Play Station" />
+<Layout title="G2A - Play Station">
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-r from-blue-900 to-indigo-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-6">
+                    <h1 class="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+                        PlayStation Universe
+                    </h1>
+                    <p class="text-lg text-gray-300">
+                        Explora un mundo de entretenimiento sin límites con los mejores títulos de PlayStation.
+                        Desde exclusivos aclamados hasta los últimos lanzamientos AAA.
+                    </p>
+                    <div class="flex gap-4">
+                        <button class="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-full transition-all">
+                            Explorar Juegos
+                        </button>
+                        <button class="border border-white px-6 py-3 rounded-full hover:bg-white hover:text-blue-900 transition-all">
+                            Ver Ofertas
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg filter blur-xl"></div>
+                    <img 
+                        src="/images/ps5-console.webp" 
+                        alt="PlayStation 5" 
+                        class="relative z-10 w-full h-auto rounded-lg shadow-2xl"
+                    />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Cards Section -->
+    <section class="bg-gray-50 py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Entrega Instantánea</h3>
+                    <p class="text-gray-600">Recibe tus códigos digitales al instante después de la compra</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="h-12 w-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">100% Seguro</h3>
+                    <p class="text-gray-600">Garantía de reembolso y transacciones seguras</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="h-12 w-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Soporte 24/7</h3>
+                    <p class="text-gray-600">Asistencia técnica disponible en cualquier momento</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <section class="max-w-7xl mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Sidebar con Filtros -->
+            <aside class="md:col-span-1 space-y-8">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold mb-6 text-gray-800">Filtros</h2>
+                    
+                    <!-- Búsqueda -->
+                    <div class="mb-6">
+                        <div class="relative">
+                            <input 
+                                type="text" 
+                                placeholder="Buscar juegos..." 
+                                class="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute left-3 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Géneros -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold mb-3 text-gray-700">Géneros</h3>
+                        <div class="space-y-2">
+                            {
+                                ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"].map((genre) => (
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input
+                                            type="checkbox"
+                                            class="form-checkbox h-4 w-4 text-blue-600 transition duration-150 ease-in-out"
+                                        />
+                                        <span class="text-gray-700 group-hover:text-blue-600">{genre}</span>
+                                    </label>
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Precio -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold mb-3 text-gray-700">Precio</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between">
+                                <span id="price-value" class="text-sm text-gray-600">$0 - $100</span>
+                            </div>
+                            <input
+                                type="range"
+                                min="0"
+                                max="100"
+                                value="100"
+                                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                            />
+                            <div class="flex justify-between space-x-4">
+                                <input
+                                    type="number"
+                                    min="0"
+                                    value="0"
+                                    class="w-20 px-2 py-1 border rounded-md text-sm"
+                                />
+                                <span class="text-gray-500">-</span>
+                                <input
+                                    type="number"
+                                    min="0"
+                                    value="100"
+                                    class="w-20 px-2 py-1 border rounded-md text-sm"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calificación -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3 text-gray-700">Calificación</h3>
+                        <div class="space-y-2">
+                            {[5,4,3,2,1].map((rating) => (
+                                <label class="flex items-center gap-2 cursor-pointer group">
+                                    <input
+                                        type="checkbox"
+                                        class="form-checkbox h-4 w-4 text-blue-600"
+                                    />
+                                    <div class="flex items-center gap-1">
+                                        {Array(rating).fill("★").map(() => (
+                                            <span class="text-yellow-400">★</span>
+                                        ))}
+                                        {Array(5-rating).fill("☆").map(() => (
+                                            <span class="text-gray-300">☆</span>
+                                        ))}
+                                    </div>
+                                </label>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Game Cards Grid -->
+            <main class="md:col-span-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {
+                        paginatedGames.map((game) => (
+                            <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                                <div class="relative">
+                                    <img
+                                        src={game.data.image}
+                                        alt={game.data.title}
+                                        class="w-full h-48 object-cover object-center"
+                                    />
+                                    <div class="absolute top-2 right-2">
+                                        <span class="px-2 py-1 bg-blue-600 text-white text-sm rounded-full">
+                                            {game.data.discount ? `${game.data.discount}% OFF` : 'Nuevo'}
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="p-4">
+                                    <h3 class="text-lg font-bold text-gray-800 mb-2">
+                                        {game.data.title}
+                                    </h3>
+                                    <div class="flex items-center gap-1 mb-2">
+                                        {Array(5).fill("").map((_, i) => (
+                                            <span class={i < game.data.rating ? "text-yellow-400" : "text-gray-300"}>
+                                                ★
+                                            </span>
+                                        ))}
+                                        <span class="text-sm text-gray-600 ml-1">
+                                            ({game.data.reviews || 0})
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-3">
+                                        {game.data.description?.slice(0, 100)}...
+                                    </p>
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex items-baseline gap-2">
+                                            <span class="text-2xl font-bold text-blue-600">
+                                                ${game.data.price}
+                                            </span>
+                                            {game.data.originalPrice && (
+                                                <span class="text-sm text-gray-400 line-through">
+                                                    ${game.data.originalPrice}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                            Agregar
+                                        </button>
+                                    </div>
+                                </div>
+                            </article>
+                        ))
+                    }
+                </div>
+
+                <!-- Paginación -->
+                <div class="mt-12 flex justify-center">
+                    <nav class="flex items-center gap-2">
+                        {
+                            Array.from({length: totalPages}, (_, i) => (
+                                <a
+                                    href={`?page=${i + 1}`}
+                                    class={`px-4 py-2 rounded-lg ${
+                                        page === i + 1
+                                            ? "bg-blue-600 text-white"
+                                            : "bg-white text-gray-700 hover:bg-gray-50"
+                                    }`}
+                                >
+                                    {i + 1}
+                                </a>
+                            ))
+                        }
+                    </nav>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="bg-gradient-to-r from-blue-900 to-indigo-900 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold text-white mb-4">
+                    ¡Mantente Informado!
+                </h2>
+                <p class="text-gray-300 mb-8 max-w-2xl mx-auto">
+                    Suscríbete a nuestro newsletter para recibir las últimas noticias, ofertas exclusivas
+                    y contenido especial de PlayStation.
+                </p>
+                <form class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+                    <input
+                        type="email"
+                        placeholder="Tu correo electrónico"
+                        class="px-4 py-3 rounded-lg flex-grow"
+                    />
+                    <button class="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                        Suscribirse
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script is:inline>
+        // Funcionalidad para los filtros
+        document.addEventListener('DOMContentLoaded', () => {
+            // Actualizar valor del precio
+            const priceRange = document.querySelector('input[type="range"]');
+            const priceValue = document.getElementById('price-value');
+            const minPrice = document.querySelector('input[type="number"]:first-of-type');
+            const maxPrice = document.querySelector('input[type="number"]:last-of-type');
+
+            function updatePriceValue() {
+                priceValue.textContent = `$${minPrice.value} - $${maxPrice.value}`;
+            }
+
+            if (priceRange && minPrice && maxPrice) {
+                priceRange.addEventListener('input', (e) => {
+                    maxPrice.value = e.target.value;
+                    updatePriceValue();
+                });
+
+                minPrice.addEventListener('input', updatePriceValue);
+                maxPrice.addEventListener('input', updatePriceValue);
+            }
+        });
+    </script>
+</Layout>
