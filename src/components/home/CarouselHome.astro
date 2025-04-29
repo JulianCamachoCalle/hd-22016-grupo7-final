@@ -1,33 +1,9 @@
 ---
 import ContentCarousel from "./ContentCarousel.astro";
 
-const slides = [
-  {
-    imageSrc: "/src/assets/images-home/gtavi.webp",
-    altText: "GTA VI",
-    title: "GTA VI",
-  },
-  {
-    imageSrc: "/src/assets/images-home/Assassin's Creed Shadows.webp",
-    altText: "Assassin's Creed Shadows",
-    title: "Assassin's Creed ShadowsI",
-  },
-  {
-    imageSrc: "/src/assets/images-home/Avowed.webp",
-    altText: "Avowed",
-    title: "Avowed",
-  },
-  {
-    imageSrc: "/src/assets/images-home/Split Fiction.webp",
-    altText: "Split Fiction",
-    title: "Split Fiction",
-  },
-  {
-    imageSrc: "/src/assets/images-home/Elden Ring Nightreign.webp",
-    altText: "Elden Ring Nightreign",
-    title: "Elden Ring Nightreign",
-  },
-];
+import { games } from "../../data/games.js";
+
+const gamesSelect = games.slice(0, 4);
 ---
 
 <style>
@@ -151,14 +127,14 @@ const slides = [
         class="carousel-track relative h-[400px] sm:h-[500px] md:h-[600px] overflow-hidden"
       >
         {
-          slides.map((slide, index) => (
+          gamesSelect.map((game, index) => (
             <div
               class={`carousel-item ${index === 0 ? "active" : "hidden"} absolute top-0 left-0 w-full h-full`}
             >
               <ContentCarousel
-                imageSrc={slide.imageSrc}
-                altText={slide.altText}
-                title={slide.title}
+                imageSrc={game.image}
+                altText={game.title}
+                title={game.title}
               />
             </div>
           ))
@@ -170,10 +146,10 @@ const slides = [
         class="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex gap-1 sm:gap-2 z-20"
       >
         {
-          slides.map((slide) => (
+          gamesSelect.map((game) => (
             <button
               class="w-8 sm:w-12 h-1 sm:h-1.5 rounded-full bg-white/20 hover:bg-white/60 transition-colors"
-              title={slide.title}
+              title={game.title}
             />
           ))
         }
