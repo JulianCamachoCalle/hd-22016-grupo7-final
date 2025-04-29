@@ -1,0 +1,35 @@
+---
+export interface Props {
+  titulo: string;
+  precio: number;
+  imagen: string;
+  descripcion: string;
+}
+const { titulo, precio, imagen, descripcion } = Astro.props;
+---
+
+<div 
+  class="card"
+  style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px; transition: background-color 0.3s ease, color 0.3s ease;"
+>
+  <img src={imagen} alt={titulo} style="width: 100%; height: auto; border-radius: 6px;" />
+  <h2 style="margin-top: 0.5rem;">{titulo}</h2>
+  <p><strong>Precio:</strong> ${precio}</p>
+  <p style="margin-top: 0.5rem;">{descripcion}</p>
+</div>
+
+<style>
+  .card {
+    background-color: #f9f9f9;
+  }
+
+  .card:hover {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .card:hover p,
+  .card:hover h2 {
+    color: #fff;
+  }
+</style>
