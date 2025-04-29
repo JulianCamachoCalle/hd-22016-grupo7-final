@@ -1,0 +1,23 @@
+---
+import CardsGame from "./CardsGame.astro";
+
+import { games } from "../../data/games.js";
+---
+
+<div class="flex justify-center items-center flex-col">
+  <div class="grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-5 gap-6">
+    {
+      games.map((game) => (
+        <CardsGame
+          title={game.title}
+          description={game.description}
+          image={game.image}
+          price={game.price}
+          discount={game.discount}
+          discountPrice={game.discountPrice}
+          rating={game.rating}
+        />
+      ))
+    }
+  </div>
+</div>
