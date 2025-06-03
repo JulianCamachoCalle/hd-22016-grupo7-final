@@ -213,8 +213,7 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
                     <div class="flex gap-3">
                         <button class="w-12 h-1.5 rounded-full bg-blue-600 carousel-indicator transition-all" data-index="0"></button>
                         <button class="w-8 h-1.5 rounded-full bg-gray-300 carousel-indicator transition-all" data-index="1"></button>
-                        <button class="w-8 h-1.5 rounded-full bg-gray-300 carousel-indicator transition-all" data-index="2"></button>
-                        <button class="w-8 h-1.5 rounded-full bg-gray-300 carousel-indicator transition-all" data-index="3"></button>
+                        
                     </div>
 
                     <button id="next-btn" class="bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 transition-colors transform hover:scale-110">
@@ -444,7 +443,7 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
             });
         }
 
-        // Event listeners
+        // Event listeners para filtros
         searchInput.addEventListener('input', updateGamesDisplay);
         priceRange.addEventListener('input', (e) => {
             const value = e.target.value;
@@ -490,10 +489,23 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
             
             const slideWidth = carousel.clientWidth;
             isTransitioning = true;
-            
-            // Aplicar la transición
-            carousel.style.transition = instant ? 'none' : 'transform 500ms ease-in-out';
-            carousel.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+
+            // Si estamos en el último slide y vamos hacia adelante
+            if (currentSlide === totalSlides) {
+                currentSlide = 0;
+                carousel.style.transition = 'none';
+                carousel.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+                
+                // Forzar un reflow
+                carousel.offsetHeight;
+                
+                // Restaurar la transición
+                carousel.style.transition = instant ? 'none' : 'transform 500ms ease-in-out';
+            } else {
+                // Transición normal
+                carousel.style.transition = instant ? 'none' : 'transform 500ms ease-in-out';
+                carousel.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+            }
             
             // Actualizar indicadores con animación
             indicators.forEach((indicator, index) => {
@@ -516,13 +528,19 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
         
         function nextSlide() {
             if (isTransitioning) return;
-            currentSlide = (currentSlide + 1) % totalSlides;
+            currentSlide++;
+            if (currentSlide > totalSlides - 1) {
+                currentSlide = 0;
+            }
             updateCarousel();
         }
         
         function prevSlide() {
             if (isTransitioning) return;
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            currentSlide--;
+            if (currentSlide < 0) {
+                currentSlide = totalSlides - 1;
+            }
             updateCarousel();
         }
         
