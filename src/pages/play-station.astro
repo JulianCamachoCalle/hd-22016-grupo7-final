@@ -1,3 +1,4 @@
+
 ---
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
@@ -105,7 +106,6 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
             </div>
         </div>
     </section>
-
     <!-- PlayStation Info Carousel -->
     <section class="bg-gradient-to-b from-indigo-900/10 to-transparent py-16">
         <div class="max-w-7xl mx-auto px-6">
@@ -225,7 +225,6 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
             </div>
         </div>
     </section>
-
     <!-- Categories Section -->
     <section class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-6">
@@ -473,6 +472,9 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
         genreCheckboxes.forEach(checkbox => {
             checkbox.addEventListener('change', updateGamesDisplay);
         });
+        
+        // Mostrar el valor inicial del rango de precios
+        priceRangeValue.textContent = `Hasta $${priceRange.value}`;
 
         // Carrusel Mejorado
         const carousel = document.getElementById('news-carousel');
@@ -613,4 +615,3 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
         startAutoplay();
     </script>
 </Layout>
-
