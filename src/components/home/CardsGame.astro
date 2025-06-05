@@ -2,23 +2,21 @@
 import { Icon } from "astro-icon/components";
 
 export interface CardsGameProps {
-  title: string;
+  name: string;
   description: string;
   image: string;
   price: number;
   discount: string;
-  discountPrice?: number;
+  discountPrice: number;
   rating: number;
 }
 
-const { title, description, image, price, discount, discountPrice, rating } =
+const { name, description, image, price, discount, discountPrice, rating } =
   Astro.props;
 ---
 
-<div
-  class="flex items-center justify-center hover:scale-105 transition-transform duration-300"
->
-  <div class="w-65 border border-gray-300 rounded-4xl shadow-xl p-4">
+<div class="hover:scale-105 transition-transform duration-300">
+  <div class="min-h-108 w-70 border border-gray-300 rounded-4xl shadow-xl p-4">
     <!-- Discount -->
     <div class="relative">
       <span
@@ -36,7 +34,7 @@ const { title, description, image, price, discount, discountPrice, rating } =
       <div>
         <img
           src={image}
-          alt={title}
+          alt={name}
           class="object-cover rounded-2xl w-full h-[270px] fill"
         />
       </div>
@@ -45,7 +43,7 @@ const { title, description, image, price, discount, discountPrice, rating } =
     <!-- Details -->
     <div class="mt-4">
       <h3 class="text-gray-800 font-medium text-base">
-        {description}
+        {name}
       </h3>
       <!-- Ratings -->
       <div class="flex space-x-1 text-orange-500 text-sm mt-1">
@@ -62,7 +60,7 @@ const { title, description, image, price, discount, discountPrice, rating } =
       <div class="flex items-end justify-between">
         <div class="flex items-baseline space-x-2 mt-2">
           <span class="text-blue-600 text-xl font-semibold"
-            >${price - price * discountPrice}</span
+            >${discountPrice}</span
           >
           <span class="text-gray-400 text-sm line-through">${price}</span>
         </div>
