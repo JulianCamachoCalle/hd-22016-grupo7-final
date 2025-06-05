@@ -3,6 +3,7 @@ title: "DARK SOULS III"
 slug: "dark-souls-iii"
 type: "Clave"
 region: "Global"
+category: "Acción"
 price: 24.99
 originalPrice: 59.99
 discount: 58

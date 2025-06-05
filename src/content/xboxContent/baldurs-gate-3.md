@@ -3,6 +3,7 @@ title: "Baldur's Gate 3"
 slug: "baldurs-gate-3"
 type: "Clave"
 region: "Global"
+category: "Estrategia"
 price: 24.99
 originalPrice: 59.99
 discount: 58

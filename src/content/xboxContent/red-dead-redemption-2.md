@@ -2,6 +2,7 @@
 title: "Red Dead Redemption 2"
 slug: "red-dead-deremption-2"
 type: "Clave"
+category: "Acción"
 region: "Global"
 price: 24.99
 originalPrice: 59.99

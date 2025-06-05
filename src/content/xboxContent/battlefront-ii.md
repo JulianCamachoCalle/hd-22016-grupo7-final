@@ -1,8 +1,9 @@
 ---
 title: "Battlefront II"
 slug: "battlefront-ii"
-type: "Clave"
+type: "Cuenta"
 region: "Global"
+category: "Acción"
 price: 24.99
 originalPrice: 59.99
 discount: 58

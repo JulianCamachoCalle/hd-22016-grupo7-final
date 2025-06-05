@@ -3,6 +3,7 @@ title: "RAFT"
 slug: "raft"
 type: "Clave"
 region: "Global"
+category: "Aventura"
 price: 24.99
 originalPrice: 59.99
 discount: 58

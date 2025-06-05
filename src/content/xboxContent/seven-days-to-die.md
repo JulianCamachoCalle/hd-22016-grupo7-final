@@ -3,6 +3,7 @@ title: "7 Days to die"
 slug: "seven-days-to-die"
 type: "Clave"
 region: "Global"
+category: "Acción"
 price: 24.99
 originalPrice: 59.99
 discount: 58

@@ -3,6 +3,7 @@ title: "Battlefield 2042"
 slug: "battlefield-2042"
 type: "Clave"
 region: "Global"
+category: "Acción"
 price: 24.99
 originalPrice: 59.99
 discount: 58

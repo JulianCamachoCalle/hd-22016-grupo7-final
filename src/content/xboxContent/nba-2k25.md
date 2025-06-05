@@ -2,7 +2,8 @@
 title: "NBA 2K25"
 slug: "nba-2k25"
 type: "Clave"
-region: "Global"
+region: "Regalo"
+category: "Deportes"
 price: 24.99
 originalPrice: 59.99
 discount: 58

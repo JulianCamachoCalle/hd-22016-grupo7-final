@@ -3,6 +3,7 @@ title: "Cyberpunk 2077"
 slug: "cyberpunk-2077"
 type: "Clave"
 region: "Global"
+category: "Acción"
 price: 24.99
 originalPrice: 59.99
 discount: 58
