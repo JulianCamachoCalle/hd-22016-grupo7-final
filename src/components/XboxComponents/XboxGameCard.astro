@@ -75,7 +75,6 @@ const id = title
       const button = e.target.closest("button.favorite-btn");
       if (!button) return;
 
-      // 🔒 Detenemos propagación para que no actúe como si se hiciera clic en la tarjeta
       e.stopPropagation();
       e.preventDefault();
 

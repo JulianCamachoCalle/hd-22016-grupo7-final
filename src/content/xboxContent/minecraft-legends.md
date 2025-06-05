@@ -1,6 +1,6 @@
 ---
 title: "Minecraft legends"
-slug: "miencraft-legends"
+slug: "minecraft-legends"
 type: "Clave"
 region: "Global"
 category: "Avetura"
