@@ -6,7 +6,6 @@ import { getCollection } from "astro:content";
 // Obtener todos los juegos
 const pcGames = await getCollection("pcContent");
 
-// Parámetros del query string
 const url = new URL(Astro.request.url);
 const page = Number(url.searchParams.get("page")) || 1;
 const selectedPlatform = url.searchParams.get("plataforma") || "";
