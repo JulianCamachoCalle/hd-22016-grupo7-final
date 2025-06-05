@@ -8,11 +8,10 @@ const id = title
   .replace(/[^a-z0-9-]/g, ""); // id único y seguro
 ---
 
-<div
-  class="bg-white rounded-xl overflow-hidden shadow hover:shadow-lg transition group w-48 mx-auto"
-  id={`card-${id}`}
->
-  <div class="relative">
+<div id={`card-${id}`}>
+  <div
+    class="bg-white rounded-xl overflow-hidden shadow hover:shadow-xl transition-transform transform hover:-translate-y-1 group w-48 mx-auto"
+  >
     <img
       src={image}
       alt={title}
@@ -73,20 +72,18 @@ const id = title
     window.__xboxGameCardClickListenerRegistered = true;
 
     document.addEventListener("click", function (e) {
-      const button = e.target.closest('button.favorite-btn');
-      if (!button) {
-        console.log("Botón no encontrado");
-        return;
-      }
+      const button = e.target.closest("button.favorite-btn");
+      if (!button) return;
+
+      // 🔒 Detenemos propagación para que no actúe como si se hiciera clic en la tarjeta
+      e.stopPropagation();
+      e.preventDefault();
 
       const id = button.getAttribute("data-id");
       const icon = document.getElementById(`icon-${id}`);
-      if (!icon) {
-        console.log(`Ícono con ID icon-${id} no encontrado`);
-        return;
-      }
+      if (!icon) return;
 
-      console.log(`Cambiando color del ícono con ID icon-${id}`);
+      // Alternar color
       if (icon.classList.contains("text-gray-400")) {
         icon.classList.remove("text-gray-400");
         icon.classList.add("text-green-500");
