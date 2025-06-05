@@ -5,7 +5,7 @@ import { getCollection } from "astro:content";
 
 const pcGames = await getCollection("pcContent");
 
-const itemsPerPage = 8;
+const itemsPerPage = 9;
 const url = new URL(Astro.request.url);
 const page = Number(url.searchParams.get("page")) || 1;
 const totalPages = Math.ceil(pcGames.length / itemsPerPage);
