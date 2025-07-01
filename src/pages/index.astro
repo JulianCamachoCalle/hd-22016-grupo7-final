@@ -6,7 +6,7 @@ import CategoriasPlataformas from "../components/home/CategoriasPlataformas.astr
 ---
 
 <Layout title="G2A">
-  <CarouselHome />
+  <CarouselHome data-testid="carousel-home" />
   <section class="flex flex-col px-4 py-8">
     <div class="flex flex-col items-center mb-4 py-6 w-full">
       <h2 class="text-4xl text-black font-bold">Juegos por Plataformas</h2>
@@ -14,7 +14,7 @@ import CategoriasPlataformas from "../components/home/CategoriasPlataformas.astr
         Encuentra lo que buscas en nuestra tienda de videojuegos.
       </p>
     </div>
-    <CategoriasPlataformas />
+    <CategoriasPlataformas data-testid="categorias-plataformas" />
   </section>
   <section class="flex flex-col px-4 py-8">
     <div class="flex flex-col items-center mb-4 py-6 w-full">
@@ -24,6 +24,6 @@ import CategoriasPlataformas from "../components/home/CategoriasPlataformas.astr
         primer día!
       </p>
     </div>
-    <NextGames />
+    <NextGames data-testid="next-games" />
   </section>
 </Layout>
