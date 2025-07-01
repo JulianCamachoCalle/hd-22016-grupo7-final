@@ -23,9 +23,6 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - name: Build Astro
-        run: npm run build
-
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
