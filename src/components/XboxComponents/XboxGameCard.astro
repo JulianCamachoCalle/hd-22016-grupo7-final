@@ -8,22 +8,22 @@ const id = title
   .replace(/[^a-z0-9-]/g, ""); // id único y seguro
 ---
 
-<div id={`card-${id}`}>
+<div id={`card-${id}`} class="relative">
   <div
-    class="bg-white rounded-xl overflow-hidden shadow hover:shadow-xl transition-transform transform hover:-translate-y-1 group w-48 mx-auto"
+    class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
   >
     <img
       src={image}
       alt={title}
       loading="lazy"
-      class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-300"
+      class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
     />
 
-    <!-- Botón corazón -->
     <button
       type="button"
-      class="favorite-btn absolute top-2 right-2 bg-white rounded-full p-1 shadow hover:scale-110 transition"
+      class="favorite-btn absolute top-3 right-3 bg-white rounded-full p-1 shadow-md hover:scale-110 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500"
       data-id={id}
+      aria-label="Añadir a favoritos"
     >
       <svg
         id={`icon-${id}`}
@@ -33,35 +33,39 @@ const id = title
         viewBox="0 0 24 24"
       >
         <path
-          d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
-        2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 
-        4.5 2.09C13.09 3.81 14.76 3 16.5 
-        3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 
+          d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+        2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81
+        4.5 2.09C13.09 3.81 14.76 3 16.5
+        3 19.58 3 22 5.42 22 8.5c0 3.78-3.4
         6.86-8.55 11.54L12 21.35z"
         ></path>
       </svg>
     </button>
-  </div>
 
-  <div class="p-3">
-    <h2 class="text-sm font-semibold text-gray-800 mb-1 truncate">{title}</h2>
-    <div class="text-xs text-gray-500">{type} • {region}</div>
+    <div class="p-4">
+      <h2 class="text-base font-semibold text-gray-800 mb-1 truncate">
+        {title}
+      </h2>
+      <div class="text-xs text-gray-500 mb-2">{type} • {region}</div>
 
-    <div class="flex items-center justify-between mt-2">
-      <span class="text-green-600 font-bold">{price.toFixed(2)}€</span>
-      <span class="text-gray-400 line-through text-xs"
-        >{originalPrice.toFixed(2)}€</span
+      <div class="flex items-center justify-between mt-2">
+        <span class="text-green-600 font-bold text-lg">
+          {price.toFixed(2)}€
+        </span>
+        <span class="text-gray-400 line-through text-sm"
+          >{originalPrice.toFixed(2)}€</span
+        >
+      </div>
+
+      <div class="text-xs mt-2 text-gray-700">
+        Puede activarse en: <span class="font-bold">Perú</span>
+      </div>
+
+      <div
+        class="mt-3 text-xs inline-block bg-red-500 text-white px-2.5 py-1 rounded-full font-medium"
       >
-    </div>
-
-    <div class="text-xs mt-1 text-gray-700">
-      Puede activarse en: <span class="font-bold">Perú</span>
-    </div>
-
-    <div
-      class="mt-2 text-xs inline-block bg-red-500 text-white px-2 py-0.5 rounded"
-    >
-      -{discount}%
+        -{discount}%
+      </div>
     </div>
   </div>
 </div>
@@ -86,9 +90,9 @@ const id = title
       // Alternar color
       if (icon.classList.contains("text-gray-400")) {
         icon.classList.remove("text-gray-400");
-        icon.classList.add("text-green-500");
+        icon.classList.add("text-red-500"); // Usamos un color rojo para "favorito"
       } else {
-        icon.classList.remove("text-green-500");
+        icon.classList.remove("text-red-500");
         icon.classList.add("text-gray-400");
       }
     });
