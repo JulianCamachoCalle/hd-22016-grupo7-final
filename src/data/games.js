@@ -7,6 +7,7 @@ export const games = [
       discount: "5%",
       discountPrice: 0.05,
       rating: 5,
+      trailer: "https://www.youtube.com/watch?v=QdBZY2fkU-0"
     },
     {
       title: "Assassin's Creed Shadows",
@@ -16,6 +17,7 @@ export const games = [
       discount: "20%",
       discountPrice: 0.2,
       rating: 4,
+      trailer: "https://www.youtube.com/watch?v=vovkzbtYBC8"
     },
     {
       title: "Avowed",
@@ -25,6 +27,7 @@ export const games = [
       discount: "10%",
       discountPrice: 0.1,
       rating: 4,
+      trailer: "https://www.youtube.com/watch?v=4YEKb4i3Pbw"
     },
     {
       title: "Split Fiction",
@@ -34,6 +37,7 @@ export const games = [
       discount: "15%",
       discountPrice: 0.15,
       rating: 5,
+      trailer: "https://www.youtube.com/watch?v=fcwngWPXQtg"
     },
     {
       title: "Elden Ring Nightreign",
@@ -43,6 +47,7 @@ export const games = [
       discount: "15%",
       discountPrice: 0.15,
       rating: 4.8,
+      trailer: "https://www.youtube.com/watch?v=Ot6j_qqYQaM"
     },
     {
         title: "ARK 2",
@@ -52,15 +57,7 @@ export const games = [
         discount: "5%",
         discountPrice: 0.05,
         rating: 3,
-      },
-      {
-        title: "Beyond Good & Evil 2",
-        description: "Beyond Good & Evil 2",
-        image: "/src/assets/images-home/Beyond Good & Evil 2.webp",
-        price: 70,
-        discount: "10%",
-        discountPrice: 0.1,
-        rating: 3,
+        trailer: "https://www.youtube.com/watch?v=D8KbXpk2J9Y"
       },
       {
         title: "Fable",
@@ -70,6 +67,7 @@ export const games = [
         discount: "5%",
         discountPrice: 0.05,
         rating: 4,
+        trailer: "https://www.youtube.com/watch?v=oVkSZXPklQ4"
       },
       {
         title: "Star Citizen",
@@ -79,6 +77,7 @@ export const games = [
         discount: "5%",
         discountPrice: 0.05,
         rating: 4,
+        trailer: "https://www.youtube.com/watch?v=52rTsrwZcGQ"
       },
       {
         title: "Gears of War: E-Day",
@@ -88,5 +87,6 @@ export const games = [
         discount: "15%",
         discountPrice: 0.15,
         rating: 4,
+        trailer: "https://www.youtube.com/watch?v=EC20gLfUHeA"
       },
   ];
