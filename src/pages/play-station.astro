@@ -1,4 +1,3 @@
-
 ---
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
@@ -11,7 +10,8 @@ const playStation = [
         discount: 15,
         image: "Gears of War E-Day.webp",
         description: "Embárcate en un viaje épico y conmovedor mientras Kratos y Atreus luchan por aferrarse el uno al otro.",
-        rating: 5
+        rating: 5,
+        genres: ["Acción", "Aventura"]
     },
     {
         title: "Star Citizen",
@@ -20,7 +20,8 @@ const playStation = [
         discount: 20,
         image: "Star Citizen.webp",
         description: "Explora un universo infinito en esta épica aventura espacial.",
-        rating: 4
+        rating: 4,
+        genres: ["Aventura", "Simulación"]
     },
     {
         title: "Assassin's Creed Shadows",
@@ -29,7 +30,8 @@ const playStation = [
         discount: 10,
         image: "Assassin's Creed Shadows.webp",
         description: "Sumérgete en una nueva era de la hermandad de los asesinos.",
-        rating: 4
+        rating: 4,
+        genres: ["Acción", "Aventura", "RPG"]
     },
     {
         title: "Avowed",
@@ -38,7 +40,8 @@ const playStation = [
         discount: 25,
         image: "Avowed.webp",
         description: "Un RPG de fantasía en primera persona con una historia profunda.",
-        rating: 5
+        rating: 5,
+        genres: ["RPG", "Aventura"]
     },
     {
         title: "GTA VI",
@@ -47,7 +50,8 @@ const playStation = [
         discount: 12,
         image: "gtavi.webp",
         description: "Vive la experiencia definitiva del crimen en Vice City.",
-        rating: 5
+        rating: 5,
+        genres: ["Acción", "Aventura"]
     },
     {
         title: "ARK 2",
@@ -56,7 +60,8 @@ const playStation = [
         discount: 30,
         image: "ARK 2.webp",
         description: "Sobrevive en un mundo prehistórico lleno de dinosaurios.",
-        rating: 4
+        rating: 4,
+        genres: ["Aventura", "Supervivencia"]
     }
 ];
 
@@ -70,130 +75,292 @@ const paginatedGames = playStation.slice(
     page * itemsPerPage,
 );
 
-const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
+const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia", "Simulación", "Supervivencia"];
 ---
 
 <Layout title="G2A - Play Station">
-    <!-- Hero Section -->
-    <section class="relative bg-gradient-to-r from-blue-900 to-indigo-900 text-white py-24">
-        <div class="absolute inset-0 bg-[url('/src/assets/images-home/PlayStation.webp')] opacity-10 bg-cover bg-center"></div>
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-8 relative z-10">
-                    <h1 class="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 leading-tight">
-                        PlayStation Universe
+    <!-- Hero Section Modernizada -->
+    <section class="relative bg-gradient-to-br from-gray-900 to-blue-900 text-white py-28 overflow-hidden">
+        <div class="absolute inset-0 bg-[url('/src/assets/images-home/PlayStation-pattern.webp')] opacity-10 bg-[length:300px_300px] bg-center"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-transparent"></div>
+        
+        <!-- Partículas flotantes -->
+        <div class="absolute inset-0 overflow-hidden">
+            {Array(15).fill(0).map((_, i) => (
+                <div class="absolute rounded-full bg-white/10" 
+                     style={`
+                         width: ${Math.random() * 6 + 2}px;
+                         height: ${Math.random() * 6 + 2}px;
+                         top: ${Math.random() * 100}%;
+                         left: ${Math.random() * 100}%;
+                         animation: float ${Math.random() * 15 + 10}s linear infinite;
+                         animation-delay: ${Math.random() * 5}s;
+                     `}></div>
+            ))}
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="h-0.5 w-12 bg-blue-400"></div>
+                        <span class="text-blue-400 font-medium tracking-wider">PLAYSTATION 5</span>
+                    </div>
+                    
+                    <h1 class="text-5xl md:text-6xl font-bold leading-tight">
+                        <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">La próxima generación</span><br/>
+                        <span class="text-white">comienza aquí</span>
                     </h1>
+                    
                     <p class="text-xl text-gray-300 leading-relaxed max-w-lg">
-                        Explora un mundo de entretenimiento sin límites con los mejores títulos de PlayStation. Vive experiencias únicas en cada aventura.
+                        Experimenta cargas increíblemente rápidas, retroalimentación háptica inmersiva, gatillos adaptables y audio 3D.
                     </p>
+                    
                     <div class="flex gap-6">
-                        <button class="bg-blue-500 hover:bg-blue-600 px-8 py-4 rounded-full transition-all transform hover:scale-105 font-semibold text-lg shadow-lg hover:shadow-blue-500/50">
-                            Explorar Juegos
+                        <button class="relative overflow-hidden group bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-full transition-all transform hover:scale-105 font-semibold text-lg shadow-lg hover:shadow-blue-500/50">
+                            <span class="relative z-10">Explorar Juegos</span>
+                            <span class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                         </button>
-                        <button class="border-2 border-white px-8 py-4 rounded-full hover:bg-white hover:text-blue-900 transition-all transform hover:scale-105 font-semibold text-lg">
-                            Ver Ofertas
+                        <button class="relative overflow-hidden group border-2 border-white px-8 py-4 rounded-full hover:bg-white/10 transition-all transform hover:scale-105 font-semibold text-lg">
+                            <span class="relative z-10">Ver Ofertas</span>
+                            <span class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                         </button>
                     </div>
+                    
+                    <div class="flex items-center gap-6 pt-6">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-sm">4K HDR</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-sm">120 FPS</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-sm">Ray Tracing</span>
+                        </div>
+                    </div>
                 </div>
+                
                 <div class="relative">
-                    <div class="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-2xl filter blur-2xl"></div>
-                    <img 
-                        src="/src/assets/images-home/ps5-console.webp"
-                        alt="PlayStation 5" 
-                        class="relative z-10 w-full h-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
-                    />
+                    <div class="absolute -top-16 -right-16 w-64 h-64 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+                    <div class="absolute -bottom-16 -left-16 w-64 h-64 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+                    
+                    <div class="relative z-10">
+                        <img 
+                            src="/src/assets/images-home/ps5-console.webp"
+                            alt="PlayStation 5" 
+                            class="w-full h-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-700"
+                            data-aos="fade-up"
+                            data-aos-duration="1000"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- PlayStation Info Carousel -->
-    <section class="bg-gradient-to-b from-indigo-900/10 to-transparent py-16">
+
+    <!-- PlayStation Info Carousel Modernizado -->
+    <section class="py-20 bg-gradient-to-b from-gray-50 to-white">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Descubre PlayStation</h2>
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-600 rounded-full text-sm font-medium mb-4">EXPERIENCIA PLAYSTATION</span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Potencia tu juego</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Descubre las tecnologías que hacen de PlayStation la plataforma definitiva para jugadores.</p>
+            </div>
             
             <div class="relative">
                 <!-- Carousel container -->
-                <div class="overflow-hidden">
+                <div class="overflow-hidden rounded-3xl shadow-2xl">
                     <div id="news-carousel" class="flex transition-transform duration-500 ease-in-out">
                         <!-- PS5 Hardware Stats -->
-                        <div class="min-w-full md:min-w-[33.333%] px-4">
-                            <div class="bg-white rounded-2xl shadow-lg overflow-hidden h-full p-8 transform transition-all duration-300 hover:scale-105">
-                                <div class="flex items-center justify-center mb-6">
-                                    <svg class="w-16 h-16 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                    </svg>
-                                </div>
-                                <div class="text-center">
-                                    <span class="text-blue-600 font-semibold text-sm tracking-wider uppercase">Hardware</span>
-                                    <h3 class="font-bold text-2xl text-gray-800 mt-2">PS5 Pro</h3>
-                                    <div class="mt-4 space-y-2">
-                                        <p class="text-gray-600">• 8K Gaming Ready</p>
-                                        <p class="text-gray-600">• Ray Tracing Mejorado</p>
-                                        <p class="text-gray-600">• SSD Ultra Rápido</p>
-                                        <p class="text-gray-600">• 16GB GDDR6</p>
+                        <div class="min-w-full md:min-w-[33.333%] px-0">
+                            <div class="relative h-full bg-gradient-to-br from-gray-900 to-blue-900 text-white overflow-hidden">
+                                <div class="absolute inset-0 bg-[url('/src/assets/images-home/ps5-pattern.webp')] opacity-10"></div>
+                                <div class="relative z-10 p-10 h-full flex flex-col">
+                                    <div class="mb-8">
+                                        <span class="text-blue-400 font-semibold text-sm tracking-wider uppercase">Hardware</span>
+                                        <h3 class="font-bold text-3xl text-white mt-2">PS5 Pro</h3>
+                                    </div>
+                                    <div class="space-y-4 flex-grow">
+                                        <div class="flex items-start gap-4">
+                                            <div class="mt-1 flex-shrink-0">
+                                                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
+                                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold">8K Gaming</h4>
+                                                <p class="text-gray-300 text-sm">Resolución ultra nítida para una experiencia visual sin igual.</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start gap-4">
+                                            <div class="mt-1 flex-shrink-0">
+                                                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
+                                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold">Ray Tracing</h4>
+                                                <p class="text-gray-300 text-sm">Iluminación y reflejos ultra realistas en tiempo real.</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start gap-4">
+                                            <div class="mt-1 flex-shrink-0">
+                                                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
+                                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold">SSD Ultra Rápido</h4>
+                                                <p class="text-gray-300 text-sm">Carga instantánea de juegos y mundos expansivos.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-8 pt-6 border-t border-gray-700">
+                                        <button class="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
+                                            <span>Ver especificaciones completas</span>
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- PlayStation Plus -->
-                        <div class="min-w-full md:min-w-[33.333%] px-4">
-                            <div class="bg-white rounded-2xl shadow-lg overflow-hidden h-full p-8 transform transition-all duration-300 hover:scale-105">
-                                <div class="flex items-center justify-center mb-6">
-                                    <svg class="w-16 h-16 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                </div>
-                                <div class="text-center">
-                                    <span class="text-blue-600 font-semibold text-sm tracking-wider uppercase">Suscripción</span>
-                                    <h3 class="font-bold text-2xl text-gray-800 mt-2">PS Plus Premium</h3>
-                                    <div class="mt-4 space-y-2">
-                                        <p class="text-gray-600">• Juegos en la nube</p>
-                                        <p class="text-gray-600">• +800 títulos</p>
-                                        <p class="text-gray-600">• Demos exclusivos</p>
-                                        <p class="text-gray-600">• Contenido retro</p>
+                        <div class="min-w-full md:min-w-[33.333%] px-0">
+                            <div class="relative h-full bg-gradient-to-br from-purple-900 to-indigo-900 text-white overflow-hidden">
+                                <div class="absolute inset-0 bg-[url('/src/assets/images-home/ps-plus-pattern.webp')] opacity-10"></div>
+                                <div class="relative z-10 p-10 h-full flex flex-col">
+                                    <div class="mb-8">
+                                        <span class="text-purple-400 font-semibold text-sm tracking-wider uppercase">Suscripción</span>
+                                        <h3 class="font-bold text-3xl text-white mt-2">PS Plus Premium</h3>
+                                    </div>
+                                    <div class="space-y-4 flex-grow">
+                                        <div class="flex items-start gap-4">
+                                            <div class="mt-1 flex-shrink-0">
+                                                <div class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center">
+                                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold">Juegos en la nube</h4>
+                                                <p class="text-gray-300 text-sm">Transmite cientos de juegos sin necesidad de descarga.</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start gap-4">
+                                            <div class="mt-1 flex-shrink-0">
+                                                <div class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center">
+                                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold">+800 títulos</h4>
+                                                <p class="text-gray-300 text-sm">Catálogo masivo de juegos PS4, PS5 y clásicos.</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start gap-4">
+                                            <div class="mt-1 flex-shrink-0">
+                                                <div class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center">
+                                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold">Contenido retro</h4>
+                                                <p class="text-gray-300 text-sm">Revive los clásicos de PS1, PS2 y PSP.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-8 pt-6 border-t border-gray-700">
+                                        <button class="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors">
+                                            <span>Ver planes de suscripción</span>
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Gaming Stats -->
-                        <div class="min-w-full md:min-w-[33.333%] px-4">
-                            <div class="bg-white rounded-2xl shadow-lg overflow-hidden h-full p-8 transform transition-all duration-300 hover:scale-105">
-                                <div class="flex items-center justify-center mb-6">
-                                    <svg class="w-16 h-16 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                    </svg>
-                                </div>
-                                <div class="text-center">
-                                    <span class="text-blue-600 font-semibold text-sm tracking-wider uppercase">Rendimiento</span>
-                                    <h3 class="font-bold text-2xl text-gray-800 mt-2">Potencia Next-Gen</h3>
-                                    <div class="mt-4 space-y-2">
-                                        <p class="text-gray-600">• 120 FPS</p>
-                                        <p class="text-gray-600">• 4K Nativo</p>
-                                        <p class="text-gray-600">• HDR Dinámico</p>
-                                        <p class="text-gray-600">• Audio 3D</p>
+                        <div class="min-w-full md:min-w-[33.333%] px-0">
+                            <div class="relative h-full bg-gradient-to-br from-gray-900 to-green-900 text-white overflow-hidden">
+                                <div class="absolute inset-0 bg-[url('/src/assets/images-home/ps-vr-pattern.webp')] opacity-10"></div>
+                                <div class="relative z-10 p-10 h-full flex flex-col">
+                                    <div class="mb-8">
+                                        <span class="text-green-400 font-semibold text-sm tracking-wider uppercase">Realidad Virtual</span>
+                                        <h3 class="font-bold text-3xl text-white mt-2">PS VR2</h3>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- VR Stats -->
-                        <div class="min-w-full md:min-w-[33.333%] px-4">
-                            <div class="bg-white rounded-2xl shadow-lg overflow-hidden h-full p-8 transform transition-all duration-300 hover:scale-105">
-                                <div class="flex items-center justify-center mb-6">
-                                    <svg class="w-16 h-16 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                    </svg>
-                                </div>
-                                <div class="text-center">
-                                    <span class="text-blue-600 font-semibold text-sm tracking-wider uppercase">VR2</span>
-                                    <h3 class="font-bold text-2xl text-gray-800 mt-2">PlayStation VR2</h3>
-                                    <div class="mt-4 space-y-2">
-                                        <p class="text-gray-600">• 4K HDR OLED</p>
-                                        <p class="text-gray-600">• 110° FOV</p>
-                                        <p class="text-gray-600">• Haptics Avanzados</p>
-                                        <p class="text-gray-600">• Eye Tracking</p>
+                                    <div class="space-y-4 flex-grow">
+                                        <div class="flex items-start gap-4">
+                                            <div class="mt-1 flex-shrink-0">
+                                                <div class="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center">
+                                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold">4K HDR OLED</h4>
+                                                <p class="text-gray-300 text-sm">Pantallas de alta resolución para una inmersión total.</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start gap-4">
+                                            <div class="mt-1 flex-shrink-0">
+                                                <div class="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center">
+                                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold">Eye Tracking</h4>
+                                                <p class="text-gray-300 text-sm">Seguimiento ocular para una interacción natural.</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start gap-4">
+                                            <div class="mt-1 flex-shrink-0">
+                                                <div class="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center">
+                                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold">Haptics Avanzados</h4>
+                                                <p class="text-gray-300 text-sm">Retroalimentación táctil precisa para mayor realismo.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-8 pt-6 border-t border-gray-700">
+                                        <button class="flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors">
+                                            <span>Explorar juegos VR</span>
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -201,61 +368,87 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
                     </div>
                 </div>
 
-                <!-- Carousel Navigation -->
-                <div class="flex justify-between items-center mt-8">
-                    <button id="prev-btn" class="bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 transition-colors transform hover:scale-110">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                <!-- Carousel Navigation Modernizada -->
+                <div class="flex justify-between items-center mt-8 px-4">
+                    <button id="prev-btn" class="group bg-white/10 hover:bg-white/20 backdrop-blur-md text-white p-4 rounded-full transition-all transform hover:scale-110 shadow-lg">
+                        <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                         </svg>
                     </button>
 
-                    <!-- Carousel Indicators -->
-                    <div class="flex gap-3">
-                        <button class="w-12 h-1.5 rounded-full bg-blue-600 carousel-indicator transition-all" data-index="0"></button>
-                        <button class="w-8 h-1.5 rounded-full bg-gray-300 carousel-indicator transition-all" data-index="1"></button>
-                        
+                    <!-- Carousel Indicators Modernizados -->
+                    <div class="flex gap-2">
+                        <button class="w-12 h-1.5 rounded-full bg-blue-600 carousel-indicator transition-all duration-300" data-index="0"></button>
+                        <button class="w-8 h-1.5 rounded-full bg-gray-300 carousel-indicator transition-all duration-300" data-index="1"></button>
+                        <button class="w-8 h-1.5 rounded-full bg-gray-300 carousel-indicator transition-all duration-300" data-index="2"></button>
                     </div>
 
-                    <button id="next-btn" class="bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 transition-colors transform hover:scale-110">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    <button id="next-btn" class="group bg-white/10 hover:bg-white/20 backdrop-blur-md text-white p-4 rounded-full transition-all transform hover:scale-110 shadow-lg">
+                        <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         </svg>
                     </button>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Categories Section -->
-    <section class="py-16 bg-gray-50">
+
+    <!-- Categories Section Modernizada -->
+    <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Categorías Destacadas</h2>
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-600 rounded-full text-sm font-medium mb-4">EXPLORAR</span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Categorías destacadas</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Encuentra tu próximo juego favorito explorando nuestras categorías más populares.</p>
+            </div>
+            
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                {["Acción", "Aventura", "Deportes", "RPG"].map((category) => (
-                    <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300 cursor-pointer">
-                        <h3 class="text-xl font-semibold text-gray-800">{category}</h3>
+                {["Acción", "Aventura", "Deportes", "RPG"].map((category, index) => (
+                    <div 
+                        class="relative overflow-hidden group rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer h-48"
+                        data-aos="fade-up"
+                        data-aos-delay={index * 100}
+                    >
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 opacity-90 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="absolute inset-0 bg-[url('/src/assets/images-home/ps-pattern-2.webp')] opacity-10"></div>
+                        <div class="relative z-10 h-full flex flex-col items-center justify-center p-6 text-center">
+                            <h3 class="text-2xl font-bold text-white mb-2">{category}</h3>
+                            <p class="text-blue-100 text-sm">Explorar {category.toLowerCase()}</p>
+                            <div class="absolute bottom-6 left-6 right-6 h-0.5 bg-white/30 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                        </div>
                     </div>
                 ))}
             </div>
         </div>
     </section>
 
-    <!-- Main Content -->
-    <section class="max-w-7xl mx-auto px-6 py-16">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
-            <!-- Sidebar con Filtros -->
-            <aside class="md:col-span-1">
-                <div class="bg-white rounded-2xl shadow-lg p-8 sticky top-4 space-y-8">
-                    <h2 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-4">Filtros</h2>
+    <!-- Main Content Modernizado -->
+    <section class="max-w-7xl mx-auto px-6 py-20 bg-gray-50">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-10">
+            <!-- Sidebar Modernizado -->
+            <aside class="lg:col-span-1">
+                <div class="bg-white rounded-3xl shadow-xl p-8 sticky top-6 space-y-8 transition-all duration-300 hover:shadow-2xl">
+                    <h2 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-4 flex items-center gap-2">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+                        </svg>
+                        <span>Filtros</span>
+                    </h2>
                     
-                    <!-- Búsqueda -->
+                    <!-- Búsqueda Modernizada -->
                     <div class="space-y-2">
-                        <label class="text-sm font-medium text-gray-700">Buscar</label>
+                        <label class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                            <span>Buscar</span>
+                        </label>
                         <div class="relative">
                             <input 
                                 type="text" 
                                 id="searchInput"
                                 placeholder="Buscar juegos..." 
-                                class="w-full pl-10 pr-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50"
+                                class="w-full pl-10 pr-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 transition-all duration-300 focus:shadow-md"
                             />
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -263,86 +456,146 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
                         </div>
                     </div>
 
-                    <!-- Géneros -->
+                    <!-- Géneros Modernizados -->
                     <div class="space-y-4">
-                        <h3 class="text-lg font-semibold text-gray-700 border-b pb-2">Géneros</h3>
+                        <h3 class="text-lg font-semibold text-gray-700 border-b pb-2 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                            </svg>
+                            <span>Géneros</span>
+                        </h3>
                         <div class="space-y-3">
                             {
                                 genres.map((genre) => (
-                                    <label class="flex items-center gap-3 cursor-pointer group hover:bg-gray-50 p-2 rounded-lg transition-colors">
-                                        <input
-                                            type="checkbox"
-                                            name="genre"
-                                            value={genre}
-                                            class="form-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 genre-checkbox"
-                                        />
-                                        <span class="text-gray-700 group-hover:text-blue-600 transition-colors">{genre}</span>
+                                    <label class="flex items-center gap-3 cursor-pointer group hover:bg-gray-50 p-2 rounded-lg transition-colors duration-200">
+                                        <div class="relative">
+                                            <input
+                                                type="checkbox"
+                                                name="genre"
+                                                value={genre}
+                                                class="absolute opacity-0 h-0 w-0 genre-checkbox"
+                                            />
+                                            <div class="h-5 w-5 flex items-center justify-center border-2 border-gray-300 rounded-md group-hover:border-blue-400 transition-colors duration-200 checkbox-indicator">
+                                                <svg class="w-3 h-3 text-white opacity-0 check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <span class="text-gray-700 group-hover:text-blue-600 transition-colors duration-200">{genre}</span>
                                     </label>
                                 ))
                             }
                         </div>
                     </div>
 
-                    <!-- Precio -->
+                    <!-- Precio Modernizado -->
                     <div class="space-y-4">
-                        <h3 class="text-lg font-semibold text-gray-700 border-b pb-2">Precio</h3>
+                        <h3 class="text-lg font-semibold text-gray-700 border-b pb-2 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>Precio</span>
+                        </h3>
                         <div class="space-y-6">
-                            <input
-                                type="range"
-                                id="priceRange"
-                                min="0"
-                                max="100"
-                                value="100"
-                                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
-                            />
-                            <div class="flex justify-between space-x-4">
+                            <div class="relative">
                                 <input
-                                    type="number"
-                                    id="minPrice"
+                                    type="range"
+                                    id="priceRange"
                                     min="0"
-                                    value="0"
-                                    class="w-24 px-3 py-2 border rounded-lg text-sm bg-gray-50"
-                                />
-                                <span class="text-gray-500 self-center">-</span>
-                                <input
-                                    type="number"
-                                    id="maxPrice"
-                                    min="0"
+                                    max="100"
                                     value="100"
-                                    class="w-24 px-3 py-2 border rounded-lg text-sm bg-gray-50"
+                                    class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600 range-slider"
                                 />
+                                <div class="absolute top-0 left-0 right-0 h-2 bg-gray-200 rounded-lg overflow-hidden">
+                                    <div class="h-full bg-blue-600 range-fill" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between space-x-4">
+                                <div class="relative flex-1">
+                                    <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">$</span>
+                                    <input
+                                        type="number"
+                                        id="minPrice"
+                                        min="0"
+                                        value="0"
+                                        class="w-full pl-8 pr-3 py-2 border rounded-lg text-sm bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    />
+                                </div>
+                                <span class="text-gray-500 self-center">-</span>
+                                <div class="relative flex-1">
+                                    <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">$</span>
+                                    <input
+                                        type="number"
+                                        id="maxPrice"
+                                        min="0"
+                                        value="100"
+                                        class="w-full pl-8 pr-3 py-2 border rounded-lg text-sm bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    />
+                                </div>
                             </div>
                             <p id="priceRangeValue" class="text-center text-sm text-gray-600">Hasta $100</p>
                         </div>
                     </div>
+                    
+                    <!-- Botón Reset -->
+                    <button id="resetFilters" class="w-full py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-colors duration-300 flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                        <span>Reiniciar filtros</span>
+                    </button>
                 </div>
             </aside>
 
-            <!-- Game Cards Grid -->
-            <main class="md:col-span-3">
+            <!-- Game Cards Grid Modernizado -->
+            <main class="lg:col-span-3">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800">Todos los juegos</h2>
+                    <div class="relative">
+                        <select class="appearance-none bg-white border rounded-xl pl-4 pr-8 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option>Ordenar por: Popularidad</option>
+                            <option>Ordenar por: Precio (Menor a Mayor)</option>
+                            <option>Ordenar por: Precio (Mayor a Menor)</option>
+                            <option>Ordenar por: Valoración</option>
+                            <option>Ordenar por: Más nuevos</option>
+                        </select>
+                        <svg class="w-4 h-4 text-gray-500 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
+
                 <div id="gamesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {
-                        playStation.map((game) => (
-                            <article class="game-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]" 
+                        playStation.map((game, index) => (
+                            <article 
+                                class="game-card relative bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
                                 data-title={game.title.toLowerCase()}
                                 data-price={game.price}
-                                data-genres={JSON.stringify(["Acción", "Aventura"])} <!-- Aquí deberías agregar los géneros reales de cada juego -->
+                                data-genres={JSON.stringify(game.genres)}
+                                data-aos="fade-up"
+                                data-aos-delay={(index % 3) * 100}
                             >
-                                <div class="relative">
+                                <div class="relative overflow-hidden">
                                     <img
                                         src={`/src/assets/images-home/${game.image}`}
                                         alt={game.title}
-                                        class="w-full h-56 object-cover transition-transform duration-500"
+                                        class="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-105"
                                     />
                                     {game.discount && (
-                                        <span class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-semibold shadow-lg">
+                                        <span class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg transform group-hover:scale-110 transition-transform">
                                             -{game.discount}%
                                         </span>
                                     )}
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition-colors duration-300 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100">
+                                            Añadir al carrito
+                                        </button>
+                                    </div>
                                 </div>
                                 
                                 <div class="p-6 space-y-4">
-                                    <h3 class="font-bold text-xl text-gray-800 line-clamp-1">
+                                    <h3 class="font-bold text-xl text-gray-800 line-clamp-1 group-hover:text-blue-600 transition-colors">
                                         {game.title}
                                     </h3>
                                     
@@ -352,15 +605,16 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
                                                 ★
                                             </span>
                                         ))}
+                                        <span class="text-sm text-gray-500 ml-1">({game.rating}.0)</span>
                                     </div>
 
                                     <p class="text-sm text-gray-600 line-clamp-2 min-h-[40px]">
                                         {game.description}
                                     </p>
 
-                                    <div class="flex items-center justify-between pt-4 border-t">
+                                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
                                         <div class="flex items-baseline gap-2">
-                                            <span class="text-3xl font-bold text-blue-600">
+                                            <span class="text-2xl font-bold text-blue-600">
                                                 ${game.price}
                                             </span>
                                             {game.originalPrice && (
@@ -369,9 +623,13 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
                                                 </span>
                                             )}
                                         </div>
-                                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-xl transition-colors shadow-lg hover:shadow-blue-500/50 font-medium">
-                                            Agregar
-                                        </button>
+                                        <div class="flex items-center gap-2">
+                                            <button class="p-2 text-gray-400 hover:text-blue-600 transition-colors">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </article>
@@ -379,32 +637,256 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
                     }
                 </div>
 
-                <!-- Paginación -->
-                <div class="mt-12 space-y-6">
-                    <div class="text-center text-sm text-gray-600 bg-white py-4 rounded-xl shadow">
-                        Mostrando {paginatedGames.length} de {playStation.length} juegos
-                    </div>
-
-                    <nav class="flex justify-center gap-2">
-                        {
-                            Array.from({ length: totalPages }, (_, i) => (
-                                <a
-                                    href={`?page=${i + 1}`}
-                                    class={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
-                                        page === i + 1
-                                            ? "bg-blue-600 text-white shadow-lg"
-                                            : "bg-white text-gray-700 hover:bg-gray-50"
-                                    }`}
-                                >
-                                    {i + 1}
-                                </a>
-                            ))
-                        }
+                <!-- Paginación Modernizada -->
+                <div class="mt-16">
+                    <nav class="flex flex-col sm:flex-row items-center justify-between gap-6">
+                        <div class="text-sm text-gray-600 bg-white py-3 px-6 rounded-xl shadow">
+                            Mostrando <span class="font-medium">{paginatedGames.length}</span> de <span class="font-medium">{playStation.length}</span> juegos
+                        </div>
+                        
+                        <div class="flex gap-2">
+                            <a
+                                href={`?page=${page > 1 ? page - 1 : 1}`}
+                                class={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
+                                    page === 1
+                                        ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                                        : "bg-white text-gray-700 hover:bg-gray-50 shadow-md"
+                                }`}
+                            >
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                            </a>
+                            
+                            {
+                                Array.from({ length: totalPages }, (_, i) => (
+                                    <a
+                                        href={`?page=${i + 1}`}
+                                        class={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
+                                            page === i + 1
+                                                ? "bg-blue-600 text-white shadow-lg"
+                                                : "bg-white text-gray-700 hover:bg-gray-50 shadow-md"
+                                        }`}
+                                    >
+                                        {i + 1}
+                                    </a>
+                                ))
+                            }
+                            
+                            <a
+                                href={`?page=${page < totalPages ? page + 1 : totalPages}`}
+                                class={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
+                                    page === totalPages
+                                        ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                                        : "bg-white text-gray-700 hover:bg-gray-50 shadow-md"
+                                }`}
+                            >
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
                     </nav>
                 </div>
             </main>
         </div>
     </section>
+
+    <!-- PlayStation Exclusives Section -->
+    <section class="py-20 bg-gradient-to-br from-gray-900 to-blue-900 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="inline-block px-4 py-1.5 bg-blue-600/20 text-blue-400 rounded-full text-sm font-medium mb-4">EXCLUSIVOS</span>
+                <h2 class="text-4xl font-bold text-white mb-4">Juegos exclusivos de PlayStation</h2>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto">Descubre títulos que solo puedes experimentar en la familia PlayStation.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {[
+                    {
+                        title: "The Last of Us Part II",
+                        image: "tlou2.webp",
+                        description: "Una emocionante historia de venganza y redención en un mundo post-apocalíptico.",
+                        price: 49.99
+                    },
+                    {
+                        title: "Ghost of Tsushima",
+                        image: "ghost.webp",
+                        description: "Conviértete en el samurái que salvará a Tsushima de la invasión mongola.",
+                        price: 39.99
+                    },
+                    {
+                        title: "Spider-Man 2",
+                        image: "spiderman2.webp",
+                        description: "Peter Parker y Miles Morales se unen para enfrentar nuevas amenazas en Nueva York.",
+                        price: 69.99
+                    }
+                ].map((game, index) => (
+                    <div 
+                        class="relative overflow-hidden rounded-2xl shadow-xl group h-96"
+                        data-aos="fade-up"
+                        data-aos-delay={index * 150}
+                    >
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10"></div>
+                        <img 
+                            src={`/src/assets/images-home/${game.image}`} 
+                            alt={game.title}
+                            class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                        />
+                        <div class="relative z-20 h-full flex flex-col justify-end p-8">
+                            <h3 class="text-2xl font-bold text-white mb-2">{game.title}</h3>
+                            <p class="text-gray-300 mb-4">{game.description}</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xl font-bold text-white">${game.price}</span>
+                                <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors duration-300 transform translate-y-2 group-hover:translate-y-0 opacity-90 group-hover:opacity-100">
+                                    Ver detalles
+                                </button>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 left-4 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg z-20">
+                            EXCLUSIVO
+                        </div>
+                    </div>
+                ))}
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="inline-flex items-center gap-2 bg-transparent hover:bg-white/10 border-2 border-white text-white px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105">
+                    <span>Ver todos los exclusivos</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PlayStation Accessories -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-600 rounded-full text-sm font-medium mb-4">ACCESORIOS</span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Mejora tu experiencia</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Descubre los accesorios oficiales diseñados para llevar tu juego al siguiente nivel.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {[
+                    {
+                        title: "DualSense Edge",
+                        price: 199.99,
+                        image: "dualsense-edge.webp",
+                        features: ["Controles personalizables", "Gatillos adaptables", "Retroalimentación háptica"]
+                    },
+                    {
+                        title: "Pulse 3D",
+                        price: 99.99,
+                        image: "pulse-3d.webp",
+                        features: ["Audio 3D", "Micrófono con cancelación de ruido", "Batería de 12h"]
+                    },
+                    {
+                        title: "PS VR2",
+                        price: 549.99,
+                        image: "ps-vr2.webp",
+                        features: ["Pantallas OLED 4K HDR", "Eye Tracking", "Haptics avanzados"]
+                    },
+                    {
+                        title: "Estación de carga",
+                        price: 29.99,
+                        image: "charging-station.webp",
+                        features: ["Carga 2 mandos", "Diseño compacto", "Indicadores LED"]
+                    }
+                ].map((item, index) => (
+                    <div 
+                        class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
+                        data-aos="fade-up"
+                        data-aos-delay={index * 100}
+                    >
+                        <div class="relative h-48 bg-gray-100 flex items-center justify-center p-8">
+                            <img 
+                                src={`/src/assets/images-home/${item.image}`} 
+                                alt={item.title}
+                                class="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-110"
+                            />
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">{item.title}</h3>
+                            <ul class="space-y-2 mb-4">
+                                {item.features.map(feature => (
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span class="text-sm text-gray-600">{feature}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                            <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+                                <span class="text-xl font-bold text-blue-600">${item.price}</span>
+                                <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition-colors duration-300">
+                                    Comprar ahora
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Animaciones personalizadas */
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-20px) translateX(10px); }
+            100% { transform: translateY(0) translateX(0); }
+        }
+        
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+        
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+        
+        /* Estilos para checkboxes personalizados */
+        .genre-checkbox:checked + .checkbox-indicator {
+            background-color: #2563eb;
+            border-color: #2563eb;
+        }
+        
+        .genre-checkbox:checked + .checkbox-indicator .check-icon {
+            opacity: 1;
+        }
+        
+        /* Estilo para el rango de precio personalizado */
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #2563eb;
+            cursor: pointer;
+            box-shadow: 0 0 2px rgba(0,0,0,0.2);
+        }
+        
+        .range-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #2563eb;
+            cursor: pointer;
+            box-shadow: 0 0 2px rgba(0,0,0,0.2);
+        }
+    </style>
 
     <script>
         // Elementos del DOM
@@ -415,6 +897,8 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
         const priceRangeValue = document.getElementById('priceRangeValue');
         const genreCheckboxes = document.querySelectorAll('.genre-checkbox');
         const gameCards = document.querySelectorAll('.game-card');
+        const resetFiltersBtn = document.getElementById('resetFilters');
+        const rangeFill = document.querySelector('.range-fill');
 
         // Función para actualizar la visualización de los juegos
         function updateGamesDisplay() {
@@ -423,6 +907,7 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
                 .filter(cb => cb.checked)
                 .map(cb => cb.value);
             const maxPrice = Number(priceRange.value);
+            const minPrice = Number(minPriceInput.value);
 
             gameCards.forEach(card => {
                 const title = card.dataset.title;
@@ -430,12 +915,14 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
                 const genres = JSON.parse(card.dataset.genres);
 
                 const matchesSearch = title.includes(searchTerm);
-                const matchesPrice = price <= maxPrice;
+                const matchesPrice = price >= minPrice && price <= maxPrice;
                 const matchesGenres = selectedGenres.length === 0 || 
                                     selectedGenres.some(genre => genres.includes(genre));
 
                 if (matchesSearch && matchesPrice && matchesGenres) {
                     card.style.display = 'block';
+                    // Trigger animation
+                    card.setAttribute('data-aos', 'fade-up');
                 } else {
                     card.style.display = 'none';
                 }
@@ -444,27 +931,29 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
 
         // Event listeners para filtros
         searchInput.addEventListener('input', updateGamesDisplay);
+        
         priceRange.addEventListener('input', (e) => {
             const value = e.target.value;
-            priceRangeValue.textContent = `Hasta $${value}`;
-            minPriceInput.value = 0;
+            priceRangeValue.textContent = `De $${minPriceInput.value} a $${value}`;
             maxPriceInput.value = value;
+            rangeFill.style.width = `${value}%`;
             updateGamesDisplay();
         });
 
         minPriceInput.addEventListener('change', (e) => {
             const value = Number(e.target.value);
-            if (value >= 0) {
-                priceRange.value = maxPriceInput.value;
+            if (value >= 0 && value <= maxPriceInput.value) {
+                priceRangeValue.textContent = `De $${value} a $${maxPriceInput.value}`;
                 updateGamesDisplay();
             }
         });
 
         maxPriceInput.addEventListener('change', (e) => {
             const value = Number(e.target.value);
-            if (value >= 0) {
+            if (value >= minPriceInput.value) {
                 priceRange.value = value;
-                priceRangeValue.textContent = `Hasta $${value}`;
+                priceRangeValue.textContent = `De $${minPriceInput.value} a $${value}`;
+                rangeFill.style.width = `${value}%`;
                 updateGamesDisplay();
             }
         });
@@ -473,8 +962,28 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
             checkbox.addEventListener('change', updateGamesDisplay);
         });
         
+        // Resetear filtros
+        resetFiltersBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            priceRange.value = 100;
+            minPriceInput.value = 0;
+            maxPriceInput.value = 100;
+            priceRangeValue.textContent = 'De $0 a $100';
+            rangeFill.style.width = '100%';
+            
+            genreCheckboxes.forEach(checkbox => {
+                checkbox.checked = false;
+                const indicator = checkbox.nextElementSibling;
+                indicator.classList.remove('bg-blue-600', 'border-blue-600');
+                const icon = indicator.querySelector('.check-icon');
+                icon.classList.add('opacity-0');
+            });
+            
+            updateGamesDisplay();
+        });
+        
         // Mostrar el valor inicial del rango de precios
-        priceRangeValue.textContent = `Hasta $${priceRange.value}`;
+        priceRangeValue.textContent = `De $0 a $${priceRange.value}`;
 
         // Carrusel Mejorado
         const carousel = document.getElementById('news-carousel');
@@ -483,13 +992,14 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
         const indicators = document.querySelectorAll('.carousel-indicator');
         
         let currentSlide = 0;
-        const totalSlides = 4;
+        const totalSlides = 3;
         let isTransitioning = false;
+        let autoplayInterval;
         
         function updateCarousel(instant = false) {
             if (isTransitioning && !instant) return;
             
-            const slideWidth = carousel.clientWidth;
+            const slideWidth = carousel.clientWidth / (window.innerWidth < 768 ? 1 : 3);
             isTransitioning = true;
 
             // Si estamos en el último slide y vamos hacia adelante
@@ -502,10 +1012,10 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
                 carousel.offsetHeight;
                 
                 // Restaurar la transición
-                carousel.style.transition = instant ? 'none' : 'transform 500ms ease-in-out';
+                carousel.style.transition = instant ? 'none' : 'transform 500ms cubic-bezier(0.4, 0, 0.2, 1)';
             } else {
                 // Transición normal
-                carousel.style.transition = instant ? 'none' : 'transform 500ms ease-in-out';
+                carousel.style.transition = instant ? 'none' : 'transform 500ms cubic-bezier(0.4, 0, 0.2, 1)';
                 carousel.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
             }
             
@@ -531,7 +1041,7 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
         function nextSlide() {
             if (isTransitioning) return;
             currentSlide++;
-            if (currentSlide > totalSlides - 1) {
+            if (currentSlide > totalSlides) {
                 currentSlide = 0;
             }
             updateCarousel();
@@ -541,7 +1051,7 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
             if (isTransitioning) return;
             currentSlide--;
             if (currentSlide < 0) {
-                currentSlide = totalSlides - 1;
+                currentSlide = totalSlides;
             }
             updateCarousel();
         }
@@ -549,10 +1059,12 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
         // Event Listeners con prevención de múltiples clics
         nextBtn.addEventListener('click', () => {
             if (!isTransitioning) nextSlide();
+            resetAutoplay();
         });
         
         prevBtn.addEventListener('click', () => {
             if (!isTransitioning) prevSlide();
+            resetAutoplay();
         });
         
         // Indicadores con efecto hover
@@ -573,19 +1085,23 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
                 if (!isTransitioning && currentSlide !== index) {
                     currentSlide = index;
                     updateCarousel();
+                    resetAutoplay();
                 }
             });
         });
         
         // Auto-play mejorado
-        let autoplayInterval;
-        
         function startAutoplay() {
             autoplayInterval = setInterval(nextSlide, 5000);
         }
         
         function stopAutoplay() {
             clearInterval(autoplayInterval);
+        }
+        
+        function resetAutoplay() {
+            stopAutoplay();
+            startAutoplay();
         }
         
         // Controlar autoplay con visibilidad de página
@@ -613,5 +1129,15 @@ const genres = ["Acción", "Aventura", "RPG", "Deportes", "Estrategia"];
         // Inicialización
         updateCarousel(true);
         startAutoplay();
+
+        // Inicializar animaciones AOS
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+                offset: 100
+            });
+        }
     </script>
 </Layout>
