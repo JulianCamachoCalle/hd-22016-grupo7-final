@@ -5,7 +5,7 @@ const { title, type, region, price, originalPrice, discount, image } =
 const id = title
   .toLowerCase()
   .replace(/\s+/g, "-")
-  .replace(/[^a-z0-9-]/g, ""); // id único y seguro
+  .replace(/[^a-z0-9-]/g, ""); // id único
 ---
 
 <div id={`card-${id}`} class="relative">
