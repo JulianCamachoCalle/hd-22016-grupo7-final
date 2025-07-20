@@ -1,15 +1,17 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
-import tailwindcss from '@tailwindcss/vite';
+import tailwindcss from "@tailwindcss/vite";
+import vercel from "@astrojs/vercel/serverless";
 
-import icon from 'astro-icon';
+import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
+  output: "server",
   vite: {
-    plugins: [
-      tailwindcss()]},
+    plugins: [tailwindcss()],
+  },
 
-  integrations: [icon()]
+  integrations: [icon()],
 });
