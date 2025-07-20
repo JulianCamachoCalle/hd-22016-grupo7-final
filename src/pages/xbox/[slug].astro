@@ -11,7 +11,7 @@ if (!xboxGame) {
   throw new Error(`Juego no encontrado: ${slug}`);
 }
 
-// Rutas dinámicas
+// Rutas dinámica
 export async function getStaticPaths() {
   const games = await getCollection('xboxContent');
   return games.map((game) => ({

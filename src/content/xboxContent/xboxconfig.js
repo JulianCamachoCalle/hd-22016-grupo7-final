@@ -10,6 +10,7 @@ const xboxContent = defineCollection({
     discount: z.number(),
     image: z.string(),
     description: z.string(),
+    categories: z.array(z.string()).optional().default([]),
   }),
 });
 
