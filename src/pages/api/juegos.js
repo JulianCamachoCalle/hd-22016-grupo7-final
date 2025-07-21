@@ -1,5 +1,3 @@
-// src/data/juegos.js (o cualquier ubicación que prefieras)
-
 export async function getJuegos(offset = 0) {
   const API_KEY = "bc17595ddec715af83ebb599e618a600a48ba27a";
 
@@ -23,9 +21,7 @@ export async function getJuegos(offset = 0) {
 
   } catch (error) {
     console.error("Error fetching games:", error);
-    return []; // Retorna array vacío en caso de error
+    return [];
   }
 }
-
-// Exporta los juegos directamente (opcional)
 export const juegos = await getJuegos(0);
