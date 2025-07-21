@@ -2,7 +2,7 @@
 import { getCollection, getEntryBySlug } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 
-import "../../styles/global.css";
+import "../../../public/styles/global.css";
 
 const { slug } = Astro.params;
 const xboxGame = await getEntryBySlug('xboxContent', slug);
