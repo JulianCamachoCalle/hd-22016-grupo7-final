@@ -12,6 +12,4 @@ export default defineConfig({
       tailwindcss()]},
 
   integrations: [icon()],
-  site: "https://juliancamachocalle.github.io",
-  base: "hd-22016-grupo7-final",
 });
